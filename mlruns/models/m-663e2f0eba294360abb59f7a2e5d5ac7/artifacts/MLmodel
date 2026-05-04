@@ -1,0 +1,23 @@
+artifact_path: file:///c:/Users/TENPRO/Desktop/Diabetes/mlruns/models/m-663e2f0eba294360abb59f7a2e5d5ac7/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.11.1
+model_id: m-663e2f0eba294360abb59f7a2e5d5ac7
+model_size_bytes: 1110544
+model_uuid: m-663e2f0eba294360abb59f7a2e5d5ac7
+prompts: null
+run_id: b861a67d68e74a8c821512dbdd4574e5
+utc_time_created: '2026-04-12 08:25:12.296562'
