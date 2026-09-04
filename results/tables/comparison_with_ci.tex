@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Performance comparison with 95\% bootstrap CIs (stratified, $n=2000$). Primary model selected a priori on deployment grounds (TreeSHAP). DeLong $p$-values: primary vs others.}
+\label{tab:comparison_ci}
+\begin{tabular}{lcccc}
+\toprule
+Metric & Logistic Regression & SVM (RBF) & XGBoost & \textbf{Random Forest} \\
+\midrule
+Accuracy & 0.675 [0.597--0.747] & 0.674 [0.597--0.747] & 0.720 [0.649--0.786] & \textbf{0.707 [0.636--0.773]} \\
+Precision & 0.527 [0.453--0.605] & 0.525 [0.456--0.600] & 0.574 [0.500--0.653] & \textbf{0.556 [0.487--0.627]} \\
+Recall & 0.742 [0.630--0.852] & 0.778 [0.667--0.889] & 0.797 [0.685--0.889] & \textbf{0.835 [0.722--0.926]} \\
+F1 & 0.615 [0.537--0.696] & 0.626 [0.552--0.701] & 0.667 [0.584--0.739] & \textbf{0.667 [0.596--0.735]} \\
+ROC-AUC & 0.799 [0.725--0.864] & 0.799 [0.725--0.862] & 0.826 [0.753--0.886] & \textbf{0.818 [0.743--0.879]} \\
+\midrule
+\multicolumn{5}{l}{\textit{DeLong AUC test vs Random Forest}: Logistic Regression: $\Delta$=+0.019 [-0.077--0.114], $p$=0.703, SVM (RBF): $\Delta$=+0.019 [-0.076--0.115], $p$=0.689, XGBoost: $\Delta$=-0.009 [-0.101--0.083], $p$=0.854} \\
+\bottomrule
+\end{tabular}
+\end{table}

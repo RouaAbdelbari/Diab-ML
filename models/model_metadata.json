@@ -1,0 +1,140 @@
+{
+  "run_timestamp": "2026-08-17T22:19:42.548922",
+  "model_name": "Random Forest",
+  "model_selection_rationale": "Declared a priori before test set evaluation. Deployment constraint: TreeSHAP required for real-time dashboard. OOF rank: 3/4 (by OOF ROC-AUC). Test performance was NOT used for selection.",
+  "threshold": 0.48,
+  "threshold_search_range": "[0.01, 0.99] step 0.01",
+  "threshold_search_note": "Range changed from [0.20, 0.70] used in earlier version. Paper Equation (5) must be updated to τ ∈ [0.01, 0.99].",
+  "min_recall_constraint": 0.75,
+  "threshold_constraint_satisfied": true,
+  "features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age",
+    "glucose_bmi",
+    "bmi_category",
+    "glucose_category"
+  ],
+  "original_features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "training_seed": 42,
+  "cv_folds": 10,
+  "n_iter_per_model": 50,
+  "scoring": "roc_auc",
+  "search_budget_parity": "All four models: n_iter=50, cv=10, scoring=roc_auc",
+  "dataset": {
+    "path": "data/diabetes.csv",
+    "n_total": 768,
+    "n_train": 614,
+    "n_test": 154,
+    "prevalence": 0.3489583333333333
+  },
+  "hyperparameters": {
+    "Logistic Regression": {
+      "model__solver": "liblinear",
+      "model__penalty": "l2",
+      "model__max_iter": "2000",
+      "model__C": "0.01"
+    },
+    "SVM (RBF)": {
+      "model__kernel": "rbf",
+      "model__gamma": "0.001",
+      "model__C": "1"
+    },
+    "XGBoost": {
+      "model__subsample": "0.7",
+      "model__n_estimators": "100",
+      "model__min_child_weight": "5",
+      "model__max_depth": "7",
+      "model__learning_rate": "0.05",
+      "model__colsample_bytree": "1.0"
+    },
+    "Random Forest": {
+      "model__n_estimators": "300",
+      "model__min_samples_split": "5",
+      "model__max_features": "log2",
+      "model__max_depth": "15",
+      "model__class_weight": "balanced"
+    }
+  },
+  "metrics": {
+    "Logistic Regression": {
+      "cv_roc_auc": 0.8448863636363637,
+      "threshold": 0.57,
+      "oof_f1": 0.677895,
+      "oof_recall": 0.752336,
+      "Accuracy": 0.6753,
+      "Precision": 0.5263,
+      "Recall": 0.7407,
+      "F1": 0.6154,
+      "ROC_AUC": 0.7996,
+      "PR_AUC": 0.635,
+      "Specificity": 0.64,
+      "Sensitivity": 0.7407
+    },
+    "SVM (RBF)": {
+      "cv_roc_auc": 0.8448051948051948,
+      "threshold": 0.61,
+      "oof_f1": 0.678715,
+      "oof_recall": 0.78972,
+      "Accuracy": 0.6753,
+      "Precision": 0.525,
+      "Recall": 0.7778,
+      "F1": 0.6269,
+      "ROC_AUC": 0.7987,
+      "PR_AUC": 0.6317,
+      "Specificity": 0.62,
+      "Sensitivity": 0.7778
+    },
+    "XGBoost": {
+      "cv_roc_auc": 0.8402597402597403,
+      "threshold": 0.62,
+      "oof_f1": 0.684318,
+      "oof_recall": 0.785047,
+      "Accuracy": 0.7208,
+      "Precision": 0.5733,
+      "Recall": 0.7963,
+      "F1": 0.6667,
+      "ROC_AUC": 0.8269,
+      "PR_AUC": 0.7226,
+      "Specificity": 0.68,
+      "Sensitivity": 0.7963
+    },
+    "Random Forest": {
+      "cv_roc_auc": 0.8411931818181818,
+      "threshold": 0.48,
+      "oof_f1": 0.688,
+      "oof_recall": 0.803738,
+      "Accuracy": 0.7078,
+      "Precision": 0.5556,
+      "Recall": 0.8333,
+      "F1": 0.6667,
+      "ROC_AUC": 0.8182,
+      "PR_AUC": 0.6939,
+      "Specificity": 0.64,
+      "Sensitivity": 0.8333
+    }
+  },
+  "package_versions": {
+    "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+    "numpy": "2.0.2",
+    "pandas": "2.2.2",
+    "scikit-learn": "1.4.2",
+    "imbalanced-learn": "0.14.2",
+    "xgboost": "3.4.1",
+    "shap": "0.49.1"
+  }
+}

@@ -1,0 +1,5 @@
+cluster_id,label,n,glucose_mean,bmi_mean,age_mean,outcome_rate
+0,Very High Risk,138,160.03,39.45,34.09,0.7464
+1,Moderate Risk,230,105.5,35.12,28.13,0.2435
+2,High Risk,183,134.06,32.22,46.01,0.5027
+3,Low Risk,217,103.71,25.28,27.35,0.0783

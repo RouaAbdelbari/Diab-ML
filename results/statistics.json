@@ -1,0 +1,604 @@
+{
+  "primary_model": "Random Forest",
+  "primary_model_selection_rationale": "Selected a priori before test set evaluation. Rationale: RandomForestClassifier supports TreeSHAP for real-time local explanations in the Streamlit dashboard. OOF ROC-AUC ranking is reported separately; model selection did NOT use any test set metric.",
+  "threshold_search_range": "[0.01, 0.99] step 0.01",
+  "threshold_search_note": "Previous version used [0.20, 0.70]. Current range is wider. Paper Equation (5) must be updated to reflect τ ∈ [0.01, 0.99].",
+  "bootstrap": {
+    "n_resamples": 2000,
+    "ci_level": 0.95,
+    "method": "stratified percentile (positive/negative strata sampled independently)",
+    "seed": 42,
+    "results": {
+      "Logistic Regression": {
+        "accuracy": {
+          "mean": 0.6749,
+          "lower": 0.5974,
+          "upper": 0.7468,
+          "std": 0.0372
+        },
+        "precision": {
+          "mean": 0.5271,
+          "lower": 0.4533,
+          "upper": 0.6053,
+          "std": 0.0387
+        },
+        "recall": {
+          "mean": 0.7417,
+          "lower": 0.6296,
+          "upper": 0.8519,
+          "std": 0.0592
+        },
+        "f1": {
+          "mean": 0.6154,
+          "lower": 0.5373,
+          "upper": 0.6957,
+          "std": 0.0407
+        },
+        "roc_auc": {
+          "mean": 0.7995,
+          "lower": 0.725,
+          "upper": 0.8639,
+          "std": 0.0348
+        }
+      },
+      "SVM (RBF)": {
+        "accuracy": {
+          "mean": 0.6742,
+          "lower": 0.5974,
+          "upper": 0.7468,
+          "std": 0.0371
+        },
+        "precision": {
+          "mean": 0.5251,
+          "lower": 0.4556,
+          "upper": 0.6,
+          "std": 0.0366
+        },
+        "recall": {
+          "mean": 0.7782,
+          "lower": 0.6667,
+          "upper": 0.8889,
+          "std": 0.0558
+        },
+        "f1": {
+          "mean": 0.6263,
+          "lower": 0.5522,
+          "upper": 0.7007,
+          "std": 0.0384
+        },
+        "roc_auc": {
+          "mean": 0.7986,
+          "lower": 0.725,
+          "upper": 0.8619,
+          "std": 0.0348
+        }
+      },
+      "XGBoost": {
+        "accuracy": {
+          "mean": 0.7204,
+          "lower": 0.6494,
+          "upper": 0.7857,
+          "std": 0.0355
+        },
+        "precision": {
+          "mean": 0.5743,
+          "lower": 0.5,
+          "upper": 0.6528,
+          "std": 0.0391
+        },
+        "recall": {
+          "mean": 0.7967,
+          "lower": 0.6852,
+          "upper": 0.8889,
+          "std": 0.0546
+        },
+        "f1": {
+          "mean": 0.6666,
+          "lower": 0.5839,
+          "upper": 0.7385,
+          "std": 0.0386
+        },
+        "roc_auc": {
+          "mean": 0.8264,
+          "lower": 0.7531,
+          "upper": 0.8859,
+          "std": 0.0329
+        }
+      },
+      "Random Forest": {
+        "accuracy": {
+          "mean": 0.7073,
+          "lower": 0.6362,
+          "upper": 0.7727,
+          "std": 0.0358
+        },
+        "precision": {
+          "mean": 0.5564,
+          "lower": 0.4868,
+          "upper": 0.6267,
+          "std": 0.0362
+        },
+        "recall": {
+          "mean": 0.8349,
+          "lower": 0.7222,
+          "upper": 0.9259,
+          "std": 0.0514
+        },
+        "f1": {
+          "mean": 0.667,
+          "lower": 0.5957,
+          "upper": 0.7353,
+          "std": 0.0361
+        },
+        "roc_auc": {
+          "mean": 0.8179,
+          "lower": 0.7431,
+          "upper": 0.8788,
+          "std": 0.0341
+        }
+      }
+    }
+  },
+  "delong": {
+    "description": "Two-sided DeLong (1988) AUC test, primary model vs each other.",
+    "finding": "All p-values >> 0.05. All AUC confidence intervals overlap. The four models are statistically indistinguishable at n=154 test samples.",
+    "results": {
+      "Logistic Regression": {
+        "auc_a": 0.8182,
+        "auc_b": 0.7996,
+        "diff": 0.0186,
+        "se": 0.048829,
+        "ci_lower": -0.0771,
+        "ci_upper": 0.1143,
+        "z": 0.3812,
+        "p_value": 0.7031
+      },
+      "SVM (RBF)": {
+        "auc_a": 0.8182,
+        "auc_b": 0.7987,
+        "diff": 0.0195,
+        "se": 0.048799,
+        "ci_lower": -0.0761,
+        "ci_upper": 0.1152,
+        "z": 0.4004,
+        "p_value": 0.6889
+      },
+      "XGBoost": {
+        "auc_a": 0.8182,
+        "auc_b": 0.8269,
+        "diff": -0.0086,
+        "se": 0.046913,
+        "ci_lower": -0.1006,
+        "ci_upper": 0.0833,
+        "z": -0.1836,
+        "p_value": 0.8544
+      }
+    }
+  },
+  "per_fold_cv": {
+    "Logistic Regression": {
+      "accuracy": {
+        "per_fold": [
+          0.7742,
+          0.6452,
+          0.7419,
+          0.7258,
+          0.7377,
+          0.6885,
+          0.6885,
+          0.7213,
+          0.7377,
+          0.6557
+        ],
+        "mean": 0.7117,
+        "std": 0.041,
+        "min": 0.6452,
+        "max": 0.7742
+      },
+      "precision": {
+        "per_fold": [
+          0.6333,
+          0.5,
+          0.6,
+          0.5758,
+          0.5758,
+          0.5333,
+          0.5333,
+          0.5625,
+          0.5714,
+          0.5
+        ],
+        "mean": 0.5585,
+        "std": 0.0424,
+        "min": 0.5,
+        "max": 0.6333
+      },
+      "recall": {
+        "per_fold": [
+          0.8636,
+          0.8182,
+          0.8182,
+          0.8636,
+          0.9048,
+          0.7619,
+          0.7619,
+          0.8571,
+          0.9524,
+          0.8095
+        ],
+        "mean": 0.8411,
+        "std": 0.0599,
+        "min": 0.7619,
+        "max": 0.9524
+      },
+      "f1": {
+        "per_fold": [
+          0.7308,
+          0.6207,
+          0.6923,
+          0.6909,
+          0.7037,
+          0.6275,
+          0.6275,
+          0.6792,
+          0.7143,
+          0.6182
+        ],
+        "mean": 0.6705,
+        "std": 0.0429,
+        "min": 0.6182,
+        "max": 0.7308
+      },
+      "roc_auc": {
+        "per_fold": [
+          0.858,
+          0.8636,
+          0.8773,
+          0.8,
+          0.8833,
+          0.8476,
+          0.8298,
+          0.8262,
+          0.875,
+          0.7881
+        ],
+        "mean": 0.8449,
+        "std": 0.033,
+        "min": 0.7881,
+        "max": 0.8833
+      }
+    },
+    "SVM (RBF)": {
+      "accuracy": {
+        "per_fold": [
+          0.7903,
+          0.6613,
+          0.7419,
+          0.7581,
+          0.7213,
+          0.7049,
+          0.7049,
+          0.7541,
+          0.7705,
+          0.6885
+        ],
+        "mean": 0.7296,
+        "std": 0.0402,
+        "min": 0.6613,
+        "max": 0.7903
+      },
+      "precision": {
+        "per_fold": [
+          0.6957,
+          0.5152,
+          0.6,
+          0.6207,
+          0.5625,
+          0.5517,
+          0.5517,
+          0.6071,
+          0.6129,
+          0.5333
+        ],
+        "mean": 0.5851,
+        "std": 0.053,
+        "min": 0.5152,
+        "max": 0.6957
+      },
+      "recall": {
+        "per_fold": [
+          0.7273,
+          0.7727,
+          0.8182,
+          0.8182,
+          0.8571,
+          0.7619,
+          0.7619,
+          0.8095,
+          0.9048,
+          0.7619
+        ],
+        "mean": 0.7994,
+        "std": 0.0531,
+        "min": 0.7273,
+        "max": 0.9048
+      },
+      "f1": {
+        "per_fold": [
+          0.7111,
+          0.6182,
+          0.6923,
+          0.7059,
+          0.6792,
+          0.64,
+          0.64,
+          0.6939,
+          0.7308,
+          0.6275
+        ],
+        "mean": 0.6739,
+        "std": 0.0394,
+        "min": 0.6182,
+        "max": 0.7308
+      },
+      "roc_auc": {
+        "per_fold": [
+          0.8545,
+          0.8614,
+          0.8739,
+          0.8011,
+          0.8821,
+          0.8512,
+          0.8286,
+          0.8345,
+          0.8726,
+          0.7881
+        ],
+        "mean": 0.8448,
+        "std": 0.0315,
+        "min": 0.7881,
+        "max": 0.8821
+      }
+    },
+    "XGBoost": {
+      "accuracy": {
+        "per_fold": [
+          0.7419,
+          0.7419,
+          0.7581,
+          0.7258,
+          0.7869,
+          0.7213,
+          0.6885,
+          0.7213,
+          0.7705,
+          0.6557
+        ],
+        "mean": 0.7312,
+        "std": 0.0385,
+        "min": 0.6557,
+        "max": 0.7869
+      },
+      "precision": {
+        "per_fold": [
+          0.65,
+          0.5938,
+          0.6129,
+          0.5806,
+          0.6333,
+          0.5714,
+          0.5333,
+          0.5625,
+          0.6061,
+          0.5
+        ],
+        "mean": 0.5844,
+        "std": 0.0453,
+        "min": 0.5,
+        "max": 0.65
+      },
+      "recall": {
+        "per_fold": [
+          0.5909,
+          0.8636,
+          0.8636,
+          0.8182,
+          0.9048,
+          0.7619,
+          0.7619,
+          0.8571,
+          0.9524,
+          0.7143
+        ],
+        "mean": 0.8089,
+        "std": 0.1049,
+        "min": 0.5909,
+        "max": 0.9524
+      },
+      "f1": {
+        "per_fold": [
+          0.619,
+          0.7037,
+          0.717,
+          0.6792,
+          0.7451,
+          0.6531,
+          0.6275,
+          0.6792,
+          0.7407,
+          0.5882
+        ],
+        "mean": 0.6753,
+        "std": 0.053,
+        "min": 0.5882,
+        "max": 0.7451
+      },
+      "roc_auc": {
+        "per_fold": [
+          0.8477,
+          0.8705,
+          0.8602,
+          0.767,
+          0.8893,
+          0.8381,
+          0.7929,
+          0.825,
+          0.9071,
+          0.8048
+        ],
+        "mean": 0.8403,
+        "std": 0.0439,
+        "min": 0.767,
+        "max": 0.9071
+      }
+    },
+    "Random Forest": {
+      "accuracy": {
+        "per_fold": [
+          0.7581,
+          0.7742,
+          0.7419,
+          0.7419,
+          0.8033,
+          0.7705,
+          0.7049,
+          0.7213,
+          0.7541,
+          0.7049
+        ],
+        "mean": 0.7475,
+        "std": 0.0314,
+        "min": 0.7049,
+        "max": 0.8033
+      },
+      "precision": {
+        "per_fold": [
+          0.6842,
+          0.6333,
+          0.5938,
+          0.6,
+          0.6667,
+          0.64,
+          0.5556,
+          0.5667,
+          0.5938,
+          0.5556
+        ],
+        "mean": 0.6089,
+        "std": 0.0454,
+        "min": 0.5556,
+        "max": 0.6842
+      },
+      "recall": {
+        "per_fold": [
+          0.5909,
+          0.8636,
+          0.8636,
+          0.8182,
+          0.8571,
+          0.7619,
+          0.7143,
+          0.8095,
+          0.9048,
+          0.7143
+        ],
+        "mean": 0.7898,
+        "std": 0.0952,
+        "min": 0.5909,
+        "max": 0.9048
+      },
+      "f1": {
+        "per_fold": [
+          0.6341,
+          0.7308,
+          0.7037,
+          0.6923,
+          0.75,
+          0.6957,
+          0.625,
+          0.6667,
+          0.717,
+          0.625
+        ],
+        "mean": 0.684,
+        "std": 0.0447,
+        "min": 0.625,
+        "max": 0.75
+      },
+      "roc_auc": {
+        "per_fold": [
+          0.8398,
+          0.8932,
+          0.8614,
+          0.7801,
+          0.9065,
+          0.8417,
+          0.8107,
+          0.8202,
+          0.8893,
+          0.769
+        ],
+        "mean": 0.8412,
+        "std": 0.0471,
+        "min": 0.769,
+        "max": 0.9065
+      }
+    }
+  },
+  "confusion_matrix_summary": {
+    "Logistic Regression": {
+      "TP": 40,
+      "FP": 36,
+      "FN": 14,
+      "TN": 64,
+      "FP_per_100_negatives": 36.0,
+      "threshold": 0.57
+    },
+    "SVM (RBF)": {
+      "TP": 42,
+      "FP": 38,
+      "FN": 12,
+      "TN": 62,
+      "FP_per_100_negatives": 38.0,
+      "threshold": 0.61
+    },
+    "XGBoost": {
+      "TP": 43,
+      "FP": 32,
+      "FN": 11,
+      "TN": 68,
+      "FP_per_100_negatives": 32.0,
+      "threshold": 0.62
+    },
+    "Random Forest": {
+      "TP": 45,
+      "FP": 36,
+      "FN": 9,
+      "TN": 64,
+      "FP_per_100_negatives": 36.0,
+      "threshold": 0.48
+    }
+  },
+  "recall_transfer_gap": {
+    "Logistic Regression": {
+      "oof_recall": 0.7523,
+      "test_recall": 0.7407,
+      "gap": -0.0116
+    },
+    "SVM (RBF)": {
+      "oof_recall": 0.7897,
+      "test_recall": 0.7778,
+      "gap": -0.0119
+    },
+    "XGBoost": {
+      "oof_recall": 0.785,
+      "test_recall": 0.7963,
+      "gap": 0.0113
+    },
+    "Random Forest": {
+      "oof_recall": 0.8037,
+      "test_recall": 0.8333,
+      "gap": 0.0296
+    }
+  }
+}
